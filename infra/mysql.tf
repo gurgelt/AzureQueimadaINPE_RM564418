@@ -18,7 +18,7 @@ resource "azurerm_mysql_flexible_server" "mysql" {
 resource "azurerm_mysql_flexible_database" "db" {
   name                = var.sql_db_name
   resource_group_name = azurerm_resource_group.rg.name
-  server_name         = mysql-queimadas-paulo0926.mysql.name
+  server_name         = azurerm_mysql_flexible_server.mysql.name
   charset             = "utf8mb4"
   collation           = "utf8mb4_unicode_ci"
 }
@@ -26,7 +26,7 @@ resource "azurerm_mysql_flexible_database" "db" {
 resource "azurerm_mysql_flexible_server_firewall_rule" "allow_azure" {
   name                = "AllowAzureServices"
   resource_group_name = azurerm_resource_group.rg.name
-  server_name         = mysql-queimadas-paulo0926.mysql.name
+  server_name         = azurerm_mysql_flexible_server.mysql.name
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "0.0.0.0"
 }
