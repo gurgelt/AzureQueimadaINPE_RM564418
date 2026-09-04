@@ -26,3 +26,4 @@ variable "function_app_name" {
 variable "storage_account_name" {
   default = "stfuncpaulo0926"
 }
+# Trigger GitHub Actions
