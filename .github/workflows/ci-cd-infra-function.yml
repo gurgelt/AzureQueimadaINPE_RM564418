@@ -62,14 +62,17 @@ jobs:
 
       - name: Wait for Function App to be available
         run: |
+          echo "Listando functions na Azure para debug:"
+          az functionapp list --query "[].{Nome:name, Grupo:resourceGroup}" -o table
+          
           echo "Aguardando a Function App ficar disponível..."
-          for i in $(seq 1 10); do
+          for i in $(seq 1 15); do
             if az functionapp show --name func-queimadas-paulo0926 --resource-group rg-monitor-queimadas > /dev/null 2>&1; then
               echo "Function App encontrada e disponível na tentativa $i."
               exit 0
             fi
-            echo "Tentativa $i/10: recurso ainda não visível, aguardando 15s..."
-            sleep 15
+            echo "Tentativa $i/15: recurso ainda não visível, aguardando 20s..."
+            sleep 20
           done
           echo "Function App não ficou disponível a tempo."
           exit 1
